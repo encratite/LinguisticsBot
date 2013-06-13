@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Text;
 
 using LinguisticsBot;
 
@@ -14,7 +15,7 @@ namespace XSAMPATest
 			Writer write = (string input) =>
 			{
 				string line = XSAMPA.TranslateSentence(input) + "\n";
-				byte[] buffer = System.Text.Encoding.UTF8.GetBytes(line);
+				byte[] buffer = Encoding.UTF8.GetBytes(line);
 				stream.Write(buffer, 0, buffer.Length);
 			};
 			write("[QWEASD]");

@@ -20,6 +20,7 @@ namespace LinguisticsBot
 			MatchHandlers = new Dictionary<string, MatchHandler>();
 			MatchHandlers["^\x01VERSION\x01$"] = OnVersion;
 			MatchHandlers["^\\.ipa (.+)$"] = OnIPA;
+			MatchHandlers["^\\.oed (.+)$"] = OnOED;
 		}
 
 		protected override void OnConnect()
@@ -88,6 +89,18 @@ namespace LinguisticsBot
 		{
 			string translation = XSAMPA.TranslateSentence(match.Groups[1].Value);
 			Respond(user, target, translation);
+		}
+
+		void OnOED(Match match, User user, string target, string message)
+		{
+			string phonemes = "";
+			bool success = OED.GetOEDIPA(match.Groups[1].Value, ref phonemes);
+			string response;
+			if (success)
+				response = phonemes;
+			else
+				response = "Request failed";
+			Respond(user, target, response);
 		}
 	}
 }
