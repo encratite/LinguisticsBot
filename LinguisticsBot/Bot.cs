@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Text.RegularExpressions;
 
 using BIRCh;
@@ -17,6 +18,7 @@ namespace LinguisticsBot
 		{
 			Channels = channels;
 			MatchHandlers = new Dictionary<string, MatchHandler>();
+			MatchHandlers["^\x01VERSION\x01$"] = OnVersion;
 			MatchHandlers["^\\.ipa (.+)$"] = OnIPA;
 		}
 
@@ -46,6 +48,11 @@ namespace LinguisticsBot
 				JoinChannel(channel);
 		}
 
+		protected override void OnInvite(User user, string channel)
+		{
+			JoinChannel(channel);
+		}
+
 		protected override void OnMessage(User user, string target, string message)
 		{
 			Console.WriteLine("[{0}] <{1}@{2}> {3}", target, user.Nick, user.Host, message);
@@ -66,7 +73,15 @@ namespace LinguisticsBot
 			if (isPrivateMessage)
 				SendMessage(user.Nick, line);
 			else
+
 				SendMessage(target, line);
+		}
+
+		void OnVersion(Match match, User user, string target, string message)
+		{
+			int revision = Assembly.GetCallingAssembly().GetName().Version.Revision;
+			string response = string.Format("\x01VERSION From the entrails to the dirt, r{0}\x01", revision);
+			SendNotice(user.Nick, response);
 		}
 
 		void OnIPA(Match match, User user, string target, string message)
