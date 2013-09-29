@@ -30,7 +30,10 @@ namespace LinguisticsBot
 
 		protected override void OnDisconnect(Exception exception)
 		{
-			Console.WriteLine("Disconnected: {0}", exception.Message);
+			if(exception == null)
+				Console.WriteLine("Disconnected by server");
+			else
+				Console.WriteLine("Disconnected: {0}", exception.Message);
 		}
 
 		protected override void OnReceive(string line)
