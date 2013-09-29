@@ -48,6 +48,7 @@ namespace LinguisticsBot
 
 		protected override void OnEntry()
 		{
+			Console.WriteLine("Successfully logged onto the server");
 			foreach (string channel in Channels)
 				JoinChannel(channel);
 		}
