@@ -14,7 +14,7 @@ namespace XSAMPATest
 			FileStream stream = new FileStream("output", FileMode.Create);
 			Writer write = (string input) =>
 			{
-				string line = XSAMPA.TranslateSentence(input) + "\n";
+				string line = XSAMPA.TranslateText(input) + "\n";
 				byte[] buffer = Encoding.UTF8.GetBytes(line);
 				stream.Write(buffer, 0, buffer.Length);
 			};

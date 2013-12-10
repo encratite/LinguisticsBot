@@ -91,7 +91,7 @@ namespace LinguisticsBot
 
 		void OnIPA(Match match, User user, string target, string message)
 		{
-			string translation = XSAMPA.TranslateSentence(match.Groups[1].Value);
+			string translation = XSAMPA.TranslateText(match.Groups[1].Value);
 			Respond(user, target, translation);
 		}
 
