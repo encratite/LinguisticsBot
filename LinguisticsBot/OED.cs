@@ -15,10 +15,10 @@ namespace LinguisticsBot
 				WebClient client = new WebClient();
 				client.Encoding = Encoding.UTF8;
 				string content = client.DownloadString(url);
-				Match match = Regex.Match(content, "<a href=\"http://www.oxforddictionaries.com/words/key-to-pronunciation\"> (/.+?/)</a>");
+				Match match = Regex.Match(content, "<a href=\"http://www.oxforddictionaries.com/words/key-to-pronunciation\">Pronunciation: <\\/a> \\/(.+)");
 				if (!match.Success)
 					return false;
-				output = match.Groups[1].Value;
+				output = string.Format("/{0}/", match.Groups[1].Value);
 				return true;
 			}
 			catch (WebException)
