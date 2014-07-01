@@ -55,6 +55,10 @@
       <Project>{3e2bb2f6-ba84-4163-a8f8-c0d4b01a427f}</Project>
       <Name>BIRCh</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\LinguisticsLibrary\LinguisticsLibrary\LinguisticsLibrary.csproj">
+      <Project>{4d44b53c-cc7c-4db3-958d-ae13a91188a0}</Project>
+      <Name>LinguisticsLibrary</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
