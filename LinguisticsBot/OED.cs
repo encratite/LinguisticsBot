@@ -15,7 +15,7 @@ namespace LinguisticsBot
 				WebClient client = new WebClient();
 				client.Encoding = Encoding.UTF8;
 				string content = client.DownloadString(url);
-				Match match = Regex.Match(content, ">Pronunciation: <\\/a> \\/(.+?)(\\/|\\n)");
+				Match match = Regex.Match(content, @"Pronunciation: \/(.+?)\/");
 				if (!match.Success)
 					return false;
 				output = string.Format("/{0}/", match.Groups[1].Value);
