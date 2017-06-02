@@ -11,11 +11,11 @@ namespace LinguisticsBot
 		{
 			try
 			{
-				string url = string.Format("http://www.oxforddictionaries.com/search/english/?direct=1&multi=1&q={0}", HttpUtility.UrlEncode(term));
+				string url = string.Format("http://en.oxforddictionaries.com/definition/{0}", HttpUtility.UrlEncode(term));
 				WebClient client = new WebClient();
 				client.Encoding = Encoding.UTF8;
 				string content = client.DownloadString(url);
-				Match match = Regex.Match(content, @"Pronunciation: \/(.+?)\/");
+				Match match = Regex.Match(content, "<span class=\"phoneticspelling\">\\/(.+?)\\/</span>");
 				if (!match.Success)
 					return false;
 				output = string.Format("/{0}/", match.Groups[1].Value);
